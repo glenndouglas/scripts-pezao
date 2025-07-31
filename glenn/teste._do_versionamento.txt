@@ -7,3 +7,8 @@ agora eu coloquei a linha 3 ... kkkkk;...... LINHA3
 
 
 agora eu vou na quatro, vou alterar pelo git daqui do lafo esq. LINHA4
+~
+s
+<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+linha 5 aqui agora<<<< 5
