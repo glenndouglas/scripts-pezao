@@ -1,0 +1,1261 @@
+<style>
+  .futmesa-container {
+    max-width: 100%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    overflow-x: auto;
+  }
+  
+  .futmesa-menu-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .futmesa-rodadas-menu, 
+  .futmesa-categorias-menu {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .futmesa-menu-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+    transition: all 0.3s;
+  }
+  
+  .futmesa-menu-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .futmesa-menu-btn.active {
+    background-color: #2b6e2b;
+    color: white;
+    border-color: #2b6e2b;
+  }
+  
+  .futmesa-tab-content { 
+    display: none;
+    overflow-x: auto;
+    margin-top: 15px;
+  }
+  
+  .futmesa-tab-content.active { 
+    display: block;
+  }
+  
+  .futmesa-table {
+    min-width: 750px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .futmesa-table th {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .futmesa-table td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .futmesa-time-a { 
+    text-align: right;
+    width: 30%;
+  }
+  
+  .futmesa-time-b { 
+    text-align: left;
+    width: 30%;
+  }
+  
+  .futmesa-logo-col {
+    width: 40px;
+  }
+  
+  .futmesa-logo-col img {
+    max-width: 40px;  /* Largura máxima */
+  max-height: 30px; /* Altura máxima */
+  width: auto;      /* Mantém proporção */
+  height: auto;     /* Mantém proporção */
+  display: block;
+  margin: 0 auto;
+  object-fit: contain; /* Garante que a imagem inteira seja visível */
+  }
+  
+  .futmesa-time-name {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 8px;
+  }
+  
+  .futmesa-data {
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    width: 120px;
+  }
+  
+  .futmesa-gols { 
+    font-weight: bold;
+    min-width: 30px;
+  }
+  
+  .futmesa-bg-a1 { background-color: #f0f8f0; }
+  .futmesa-bg-master { background-color: #fff8f0; }
+  .futmesa-bg-b { background-color: #f0f8ff; }
+  
+  /*add class abaixo*/
+  
+   .futmesa-classificacao-btn {
+    background-color: #FFA500 !important;
+    color: white !important;
+    border-color: #e69500 !important;
+  }
+  
+  .futmesa-classificacao-btn:hover {
+    background-color: #e69500 !important;
+  }
+  
+  .futmesa-legenda {
+    margin-top: 10px;
+	margin-bottom:30px;
+    font-size: 12px;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .futmesa-legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .futmesa-legenda-simbolo {
+    font-weight: bold;
+  }
+</style>
+
+<div class="futmesa-container">
+  <!-- MENUS -->
+  <div class="futmesa-menu-container">
+    <div class="futmesa-rodadas-menu">
+		<button class="futmesa-menu-btn" onclick="showFutmesaTab('1')">1ª rod.</button>
+		<button class="futmesa-menu-btn" onclick="showFutmesaTab('2')">2ª rod.</button>
+		<button class="futmesa-menu-btn" onclick="showFutmesaTab('3')">3ª rod.</button>
+		<button class="futmesa-menu-btn" onclick="showFutmesaTab('4')">4ª rod.</button>
+		<button class="futmesa-menu-btn active" onclick="showFutmesaTab('5')">5ª rod.</button>
+		<button class="futmesa-menu-btn" onclick="showFutmesaTab('6')">6ª rod.</button>
+		<button class="futmesa-menu-btn futmesa-classificacao-btn" onclick="showFutmesaTab('classificacao')">Classificação</button>
+</div>
+    <div class="futmesa-categorias-menu">
+      <button class="futmesa-menu-btn" onclick="showFutmesaCategory('a1')">A1</button>
+      <button class="futmesa-menu-btn active" onclick="showFutmesaCategory('master')">MASTER</button>
+      <button class="futmesa-menu-btn" onclick="showFutmesaCategory('b')">B</button>
+    </div>
+  </div>
+  
+  <!-- 1ª RODADA - A1 -->
+<div id="futmesa-1-a1" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-a1">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 1ª rod.<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">16/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">44</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">28</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">16/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-gols">35</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">37</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">16/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-gols">32</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">40</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">16/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina FC</span></td>
+        <td class="futmesa-gols">52</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">20</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">C Ituano de Esportes</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 1ª RODADA - MASTER -->
+<div id="futmesa-1-master" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-master">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 1ª rod.<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">15/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">18</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">32</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">C.E.P.E 2004</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/2004.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina F.C.</span></td>
+        <td class="futmesa-gols">13</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">37</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia FM</span></td>
+        <td class="futmesa-gols">19</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">31</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/7-de-Setembro.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">G.D.R. 7 de Setembro</span></td>
+        <td class="futmesa-gols">15</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">35</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 1ª RODADA - B -->
+<div id="futmesa-1-b" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-b">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 1ª rod.<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">15/02 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-gols">15</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">57</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">39</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">33</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-gols">35</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">37</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">15/02 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-gols">35</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">37</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
+  <!-- 2ª RODADA - A1 -->
+<div id="futmesa-2-a1" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-a1">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 2ª rod.<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">30/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">18</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">54</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">30/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-gols">64</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">8</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">C Ituano de Esportes</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">30/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-gols">30</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">42</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">30/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina FC</span></td>
+        <td class="futmesa-gols">25</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">47</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 2ª RODADA - MASTER -->
+<div id="futmesa-2-master" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-master">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 2ª rod.<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">29/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">16</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">34</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina F.C.</span></td>
+        <td class="futmesa-gols">31</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">19</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">30</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">20</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/7-de-Setembro.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">G.D.R. 7 de Setembro</span></td>
+        <td class="futmesa-gols">30</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">20</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 2ª RODADA - B -->
+<div id="futmesa-2-b" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-b">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 2ª rod.<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">29/03 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">39</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">33</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">29</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">43</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-gols">52</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">20</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">29/03 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-gols">48</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">24</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
+  <!-- 3ª RODADA - A1 -->
+<div id="futmesa-3-a1" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-a1">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 3ª Rodada<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">27/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">C Ituano de Esportes</span></td>
+        <td class="futmesa-gols">18</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">54</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">27/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-gols">53</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">19</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">27/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">30</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">42</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Cisplatina FC</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">27/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-gols">37</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">35</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 3ª RODADA - MASTER -->
+<div id="futmesa-3-master" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-master">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 3ª Rodada<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">26/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-gols">25</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">25</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">C.E.P.E 2004</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/2004.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia FM</span></td>
+        <td class="futmesa-gols">23</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">27</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Cisplatina F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-gols">14</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">36</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-gols">21</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">29</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 3ª RODADA - B -->
+<div id="futmesa-3-b" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-b">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 3ª Rodada<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">26/04 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-gols">41</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">31</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-gols">29</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">43</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-gols">34</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">38</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">26/04 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-gols">60</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">12</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4ª RODADA - A1 -->
+<div id="futmesa-4-a1" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-a1">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 4ª Rodada<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">08/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">42</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">30</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">08/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-gols">37</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">35</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">08/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">45</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">27</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">C. Ituano de Esportes</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">08/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-gols">22</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">50</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Cisplatina FC</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4ª RODADA - MASTER -->
+<div id="futmesa-4-master" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-master">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 4ª Rodada<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">07/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">35</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">17</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina F.C.</span></td>
+        <td class="futmesa-gols">32</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">18</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">G.D.R. 7 de Setembro</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/7-de-Setembro.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">42</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">30</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 9:30h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/2004.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">C.E.P.E 2004</span></td>
+        <td class="futmesa-gols">20</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">30</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4ª RODADA - B -->
+<div id="futmesa-4-b" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-b">
+    <thead>
+      <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 4ª Rodada<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="futmesa-data">07/06 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+        <td class="futmesa-gols">53</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">19</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+        <td class="futmesa-gols">38</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">34</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">Meninos F.C.</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+        <td class="futmesa-gols">29</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">43</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+      </tr>
+      <tr>
+        <td class="futmesa-data">07/06 - 14h</td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+        <td class="futmesa-gols">50</td>
+        <td><strong>x</strong></td>
+        <td class="futmesa-gols">22</td>
+        <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+        <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- 5ª RODADA - A1 -->
+  <div id="futmesa-5-a1" class="futmesa-tab-content active">
+    <table class="futmesa-table futmesa-bg-a1">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 5ª Rodada<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">29/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Cisplatina FC</span></td>
+          <td class="futmesa-gols">32</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">40</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">29/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+          <td class="futmesa-gols">39</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">33</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">29/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">C. Ituano de Esportes</span></td>
+          <td class="futmesa-gols">16</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">56</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">29/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+          <td class="futmesa-gols">41</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">31</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5ª RODADA - MASTER -->
+  <div id="futmesa-5-master" class="futmesa-tab-content">
+    <table class="futmesa-table futmesa-bg-master">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 5ª Rodada<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">29/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+          <td class="futmesa-gols">15</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">35</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">26/07 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">TMJ FM</span></td>
+          <td class="futmesa-gols">17</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">33</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">C.E.P.E 2004</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/2004.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">26/07 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+          <td class="futmesa-gols">23</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">27</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">28/06 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/7-de-Setembro.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">G.D.R. 7 de Setembro</span></td>
+          <td class="futmesa-gols">24</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">26</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5ª RODADA - B -->
+  <div id="futmesa-5-b" class="futmesa-tab-content">
+    <table class="futmesa-table futmesa-bg-b">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 5ª Rodada<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">28/06 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+          <td class="futmesa-gols">31</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">41</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">28/06 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-gols">42</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">30</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmácia</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">19/07 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">TMJ FM</span></td>
+          <td class="futmesa-gols">30</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">42</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">28/06 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+          <td class="futmesa-gols">15</td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols">57</td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6ª RODADA - A1 -->
+  <div id="futmesa-6-a1" class="futmesa-tab-content">
+    <table class="futmesa-table futmesa-bg-a1">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 6ª Rodada<br><span style="font-size:.8em;">Categoria A1 (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">03/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Círculo Militar</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">03/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">03/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Cisplatina FC</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">03/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Meninos F.C.</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">C. Ituano de Esportes</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/logo-ituano.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6ª RODADA - MASTER -->
+  <div id="futmesa-6-master" class="futmesa-tab-content">
+    <table class="futmesa-table futmesa-bg-master">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 6ª Rodada<br><span style="font-size:.8em;">Categoria Master (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">02/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Cisplatina F.C.</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2025/01/cispla25-logo.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">G.D.R. 7 de Setembro</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/7-de-Setembro.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 9:30h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/2004.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">C.E.P.E 2004</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Dalmacia FM</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6ª RODADA - B -->
+  <div id="futmesa-6-b" class="futmesa-tab-content">
+    <table class="futmesa-table futmesa-bg-b">
+      <thead>
+        <tr><th colspan="8">PAULISTA DE EQUIPES 2025 - 6ª Rodada<br><span style="font-size:.8em;">Categoria B (12 Toques)</span></th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="futmesa-data">02/08 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Sao-Paulo.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">São Paulo F.C.</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">TMJ FM</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Tamo-Junto.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Palmeiras.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">S.E. Palmeiras</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">Meninos F.C.</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/06/meninos-logo-novo.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2024/10/Circulo-Militar.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Círculo Militar</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.C. Corinthians Pta</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2020/03/Corinthians.png"></td>
+        </tr>
+        <tr>
+          <td class="futmesa-data">02/08 - 14h</td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/10/Dalmacia-Logo-Oficial-2023.png"></td>
+          <td class="futmesa-time-a"><span class="futmesa-time-name">Dalmácia</span></td>
+          <td class="futmesa-gols"></td>
+          <td><strong>x</strong></td>
+          <td class="futmesa-gols"></td>
+          <td class="futmesa-time-b"><span class="futmesa-time-name">S.A.V. Maria Zélia</span></td>
+          <td class="futmesa-logo-col"><img src="https://www.futmesa.com.br/wp-content/uploads/2023/02/mzelia.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ADICIONE ESTAS TABELAS DE CLASSIFICAÇÃO -->
+<strong style:font-size:1.5em;text-align:center;color:red;margin-bottom:30px !important;>Classificação aguardando atualização</strong>
+<!-- aqui começa o ESCONDER as tbelas de classificacão - note q tem uma MSG publica na linha de cima
+<div id="futmesa-classificacao-a1" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-a1">
+    <thead>
+      <tr><th colspan="10">PAULISTA PRINCIPAL - A1</th></tr>
+      <tr>
+        <th>Ord</th>
+        <th>Equipe</th>
+        <th>J</th>
+        <th>PG</th>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th>GP</th>
+        <th>GC</th>
+        <th>SALDO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>São Paulo F.C.</td><td>5</td><td>15</td><td>5</td><td>0</td><td>0</td><td>234</td><td>126</td><td>+108</td></tr>
+      <tr><td>2</td><td>S.E. Palmeiras</td><td>5</td><td>12</td><td>4</td><td>0</td><td>1</td><td>231</td><td>129</td><td>+102</td></tr>
+      <tr><td>3</td><td>Círculo Militar</td><td>5</td><td>9</td><td>3</td><td>0</td><td>2</td><td>205</td><td>155</td><td>+50</td></tr>
+      <tr><td>4</td><td>Cisplatina FC</td><td>5</td><td>9</td><td>3</td><td>0</td><td>2</td><td>201</td><td>159</td><td>+42</td></tr>
+      <tr><td>5</td><td>Meninos F.C.</td><td>5</td><td>9</td><td>3</td><td>0</td><td>2</td><td>187</td><td>173</td><td>+14</td></tr>
+      <tr><td>6</td><td>S.C. Corinthians Pta</td><td>5</td><td>6</td><td>2</td><td>0</td><td>3</td><td>163</td><td>197</td><td>-34</td></tr>
+      <tr><td>7</td><td>Dalmácia</td><td>5</td><td>0</td><td>0</td><td>0</td><td>5</td><td>130</td><td>230</td><td>-100</td></tr>
+      <tr><td>8</td><td>C Ituano de Esportes</td><td>5</td><td>0</td><td>0</td><td>0</td><td>5</td><td>89</td><td>271</td><td>-182</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="futmesa-classificacao-master" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-master">
+    <thead>
+      <tr><th colspan="11">PAULISTA MASTER</th></tr>
+      <tr>
+        <th></th> 
+        <th>Ord</th>
+        <th>Equipe</th>
+        <th>J</th>
+        <th>PG</th>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th>GP</th>
+        <th>GC</th>
+        <th>SALDO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ø</td><td>1</td><td>S.C. Corinthians Pta</td><td>4</td><td>12</td><td>4</td><td>0</td><td>0</td><td>136</td><td>64</td><td>+72</td></tr>
+      <tr><td>Ø</td><td>2</td><td>S.E. Palmeiras</td><td>4</td><td>9</td><td>3</td><td>0</td><td>1</td><td>120</td><td>80</td><td>+40</td></tr>
+      <tr><td>Ø</td><td>3</td><td>São Paulo F.C.</td><td>5</td><td>9</td><td>3</td><td>0</td><td>2</td><td>131</td><td>119</td><td>+12</td></tr>
+      <tr><td>Ø</td><td>4</td><td>Cisplatina F.C.</td><td>4</td><td>9</td><td>3</td><td>0</td><td>1</td><td>103</td><td>97</td><td>+6</td></tr>
+      <tr><td>×Ø</td><td>5</td><td>S.A.V. Maria Zélia</td><td>3</td><td>4</td><td>1</td><td>1</td><td>1</td><td>82</td><td>68</td><td>+14</td></tr>
+      <tr><td>×Ø</td><td>6</td><td>C.E.P.E 2004</td><td>3</td><td>4</td><td>1</td><td>1</td><td>1</td><td>77</td><td>73</td><td>+4</td></tr>
+      <tr><td>×Ø</td><td>7</td><td>G.D.R. 7 de Setembro</td><td>4</td><td>3</td><td>1</td><td>0</td><td>3</td><td>87</td><td>113</td><td>-26</td></tr>
+      <tr><td>×Ø</td><td>8</td><td>TMJ FM</td><td>4</td><td>3</td><td>1</td><td>0</td><td>3</td><td>72</td><td>128</td><td>-56</td></tr>
+      <tr><td>×</td><td>9</td><td>Dalmácia FM</td><td>5</td><td>0</td><td>0</td><td>0</td><td>5</td><td>92</td><td>158</td><td>-66</td></tr>
+      <tr><td>×</td><td>10</td><td>*WO*</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+    </tbody>
+  </table>
+  <div class="futmesa-legenda">
+    <div class="futmesa-legenda-item"><span class="futmesa-legenda-simbolo">Ø</span> Camp. Paulista</div>
+    <div class="futmesa-legenda-item"><span class="futmesa-legenda-simbolo">×Ø</span> Copa Estado</div>
+    <div class="futmesa-legenda-item"><span class="futmesa-legenda-simbolo">×</span> Eliminados</div>
+  </div>
+</div>
+
+<div id="futmesa-classificacao-b" class="futmesa-tab-content">
+  <table class="futmesa-table futmesa-bg-b">
+    <thead>
+      <tr><th colspan="10">PAULISTA ASPIRANTES - B</th></tr>
+      <tr>
+        <th>Ord</th>
+        <th>Equipe</th>
+        <th>J</th>
+        <th>PG</th>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th>GP</th>
+        <th>GC</th>
+        <th>SALDO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>S.E. Palmeiras</td><td>5</td><td>15</td><td>5</td><td>0</td><td>0</td><td>206</td><td>154</td><td>+52</td></tr>
+      <tr><td>2</td><td>São Paulo F.C.</td><td>5</td><td>12</td><td>4</td><td>0</td><td>1</td><td>221</td><td>139</td><td>+82</td></tr>
+      <tr><td>3</td><td>S.C. Corinthians Pta</td><td>5</td><td>12</td><td>4</td><td>0</td><td>1</td><td>186</td><td>174</td><td>+12</td></tr>
+      <tr><td>4</td><td>Círculo Militar</td><td>5</td><td>9</td><td>3</td><td>0</td><td>2</td><td>235</td><td>125</td><td>+110</td></tr>
+      <tr><td>5</td><td>Meninos F.C.</td><td>5</td><td>6</td><td>2</td><td>0</td><td>3</td><td>195</td><td>165</td><td>+30</td></tr>
+      <tr><td>6</td><td>S.A.V. Maria Zélia</td><td>5</td><td>6</td><td>2</td><td>0</td><td>3</td><td>153</td><td>207</td><td>-54</td></tr>
+      <tr><td>7</td><td>TMJ FM</td><td>5</td><td>0</td><td>0</td><td>0</td><td>5</td><td>138</td><td>222</td><td>-84</td></tr>
+      <tr><td>8</td><td>Dalmácia</td><td>5</td><td>0</td><td>0</td><td>0</td><td>5</td><td>106</td><td>254</td><td>-148</td></tr>
+    </tbody>
+  </table>
+  </div>
+aqui termina o ESCONDER as tbelas de classificacão-->
+
+
+<script>
+// Variáveis de controle
+let futmesaCurrentTab = '5';
+let futmesaCurrentCategory = 'master';
+
+// Função para mostrar a aba selecionada
+function showFutmesaTab(tab) {
+  futmesaCurrentTab = tab;
+  updateFutmesaActiveContent();
+  updateFutmesaMenuStyles();
+}
+
+// Função para mostrar a categoria selecionada
+function showFutmesaCategory(category) {
+  futmesaCurrentCategory = category;
+  updateFutmesaActiveContent();
+  updateFutmesaMenuStyles();
+}
+
+// Atualiza o conteúdo visível
+function updateFutmesaActiveContent() {
+  // Esconde todas as abas
+  document.querySelectorAll('.futmesa-tab-content').forEach(content => {
+    content.classList.remove('active');
+  });
+  
+  // Mostra a aba ativa (rodada ou classificação)
+  if (futmesaCurrentTab === 'classificacao') {
+    const activeContent = document.getElementById(`futmesa-classificacao-${futmesaCurrentCategory}`);
+    if (activeContent) activeContent.classList.add('active');
+  } else {
+    const activeContent = document.getElementById(`futmesa-${futmesaCurrentTab}-${futmesaCurrentCategory}`);
+    if (activeContent) activeContent.classList.add('active');
+  }
+}
+
+// Atualiza os estilos dos menus
+function updateFutmesaMenuStyles() {
+  // Atualiza menu de rodadas
+  document.querySelectorAll('.futmesa-rodadas-menu .futmesa-menu-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (futmesaCurrentTab === 'classificacao') {
+      if (btn.classList.contains('futmesa-classificacao-btn')) {
+        btn.classList.add('active');
+      }
+    } else if (btn.textContent.includes(`${futmesaCurrentTab}ª`)) {
+      btn.classList.add('active');
+    }
+  });
+  
+  // Atualiza menu de categorias
+  document.querySelectorAll('.futmesa-categorias-menu .futmesa-menu-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.textContent.toLowerCase() === futmesaCurrentCategory || 
+        (btn.textContent === 'M' && futmesaCurrentCategory === 'master') ||
+        (btn.textContent === 'B' && futmesaCurrentCategory === 'b')) {
+      btn.classList.add('active');
+    }
+  });
+}
+
+// Inicializa
+document.addEventListener('DOMContentLoaded', () => {
+  updateFutmesaActiveContent();
+  updateFutmesaMenuStyles();
+});
+</script>
